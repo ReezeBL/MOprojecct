@@ -1,8 +1,8 @@
 #include "RProp.h"
 #include <cmath>
 
-const double ni = 1.2;
-const double nd = 0.5;
+const double ni = 1.5;
+const double nd = 0.3;
 
 double sign(double x){
 	if(x!=0)

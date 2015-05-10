@@ -16,9 +16,9 @@ Vector Armicho::getMinPoint(Vector X0){
 }
 
 double Armicho::stepic(Vector dir){
-	double l = 1;
-	const double e = 0.02;
-	const double del = 0.2;
+	double l = 1e-2;
+	const double e = 0.1;
+	const double del = 0.1;
 	double f1 = func(_x0 + dir*l);
 	double f2 = func(_x0)- e*l*(dir*dir);
 	while(f1>f2){
