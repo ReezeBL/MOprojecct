@@ -20,9 +20,8 @@ double min(double a, double b){
 }
 
 
-Net::Net(Vector (*_grad)(Vector),double (*_func)(Vector)){
-	grad = _grad;
-	func = _func;	
+Net::Net(Vector (*_grad)(Vector)){
+	grad = _grad;	
 }
 
 Vector Net::getMinPoint(Vector X0){

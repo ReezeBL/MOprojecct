@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "Fletcher-Rivs.h"
 #include "RProp.h"
 #include "Armicho.h"
@@ -18,7 +19,38 @@ Matrix hess(Vector v){
 }
 
 int main(){
-	NewtonMethod calc(grad,hess);
-	Vector res = calc.getMinPoint(Vector (20,50));
-	cout << res.x << "  " << res.y << endl;
+	setlocale(0,"Russian");
+	Vector testVal[4] = {Vector(5,-5),Vector(5,0),Vector(10,10),Vector(20,50)};
+	NewtonMethod calcNewton(grad,hess);
+	FletcherRivsCalculations calcFletcherRivs(grad,func);
+	Armicho calcArmicho(grad,func);
+	Net calcRprop(grad);
+	cout << "Тестирование метода Ньютона: " << endl;
+	for(int i=0;i<4;i++){
+		time_t t =  clock();
+		Vector res = calcNewton.getMinPoint(testVal[i]);
+		t = clock() - t;
+		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), затраченное время: " << t << " мс." << endl;
+	}
+	cout << "Тестирование алгоритма RProp: " << endl;
+	for(int i=0;i<4;i++){
+		time_t t =  clock();
+		Vector res = calcRprop.getMinPoint(testVal[i]);
+		t = clock() - t;
+		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), затраченное время: " << t << " мс." << endl;
+	}
+	cout << "Тестирование алгоритма Флетчера-Ривса: " << endl;
+	for(int i=0;i<4;i++){
+		time_t t =  clock();
+		Vector res = calcFletcherRivs.getMinPoint(testVal[i]);
+		t = clock() - t;
+		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), затраченное время: " << t << " мс." << endl;
+	}
+	cout << "Тестирование метода градиентного спуска по правилу Армихо: " << endl;
+	for(int i=0;i<4;i++){
+		time_t t =  clock();
+		Vector res = calcArmicho.getMinPoint(testVal[i]);
+		t = clock() - t;
+		cout  << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), затраченное время: " << t << " мс." << endl;
+	}
 }
