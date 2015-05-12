@@ -11,15 +11,6 @@ double sign(double x){
 		return 0;
 }
 
-double max(double a, double b){
-	return a > b ? a : b;
-}
-
-double min(double a, double b){
-	return a > b ? b : a;
-}
-
-
 Net::Net(Vector (*_grad)(Vector)){
 	grad = _grad;	
 }
