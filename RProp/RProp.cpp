@@ -1,8 +1,8 @@
 #include "RProp.h"
 #include <cmath>
 
-const double ni = 1.5;
-const double nd = 0.3;
+const double ni = 1.2;
+const double nd = 0.5;
 
 double sign(double x){
 	if(x!=0)
@@ -13,15 +13,19 @@ double sign(double x){
 
 Net::Net(Vector (*_grad)(Vector)){
 	grad = _grad;	
+	this->it = 0;
 }
 
 Vector Net::getMinPoint(Vector X0){
-	weights = X0;
+	this->weights = X0;
+	this->it = 0;
+
 	double dx = 0.5,dy = 0.5;
 	double dwx = 0, dwy = 0;
 	Vector dp;
 	Vector r;
 	while(grad(weights).Abs() > e){
+		it++;
 		dp = r;
 		r = grad(weights);
 		//-----------------------------------------------------------------------------

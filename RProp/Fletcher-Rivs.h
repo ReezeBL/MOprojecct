@@ -3,6 +3,7 @@
 
 class FletcherRivsCalculations{
 public:
+	int it;
 	FletcherRivsCalculations(Vector (*Gradient)(Vector), double (*Function)(Vector));
 	Vector getMinPoint(Vector X0);
 private:

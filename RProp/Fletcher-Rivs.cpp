@@ -5,6 +5,7 @@
 FletcherRivsCalculations::FletcherRivsCalculations(Vector (*Gradient)(Vector), double (*Function)(Vector)){
 	this->grad = Gradient;
 	this->func = Function;
+	this->it = 0;
 }
 
 double FletcherRivsCalculations::minimizer(Vector dir){
@@ -39,17 +40,20 @@ double FletcherRivsCalculations::minimizer(Vector dir){
 
 Vector FletcherRivsCalculations::getMinPoint(Vector X0){
 	this->_x0 = X0;
+	this->it = 0;
 	while(1){
+		it++;
 		Vector r,S;
 		r = -grad(_x0);
 		S = r;
-		_x0 = _x0 + S*minimizer(S);
+		_x0 = _x0 + minimizer(S)*S;
 		if(S.Abs() < e ) return _x0;
 		for(int i=0;i<2;i++){
+			it++;
 			Vector rp = r;
 			r = -grad(_x0);	
-			S = r + S*((r*r)/(rp*rp));	
-			_x0 = _x0 + S*minimizer(S);
+			S = r + ((r*r)/(rp*rp))*S;	
+			_x0 = _x0 + minimizer(S)*S;
 			if(S.Abs() < e) return _x0;
 		}
 	}

@@ -3,6 +3,7 @@
 
 class Armicho{
 public:
+	int it;
 	Armicho(Vector (*Gradient)(Vector), double (*Function)(Vector));
 	Vector getMinPoint(Vector X0);
 private:

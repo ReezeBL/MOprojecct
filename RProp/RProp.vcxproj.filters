@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RProp.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="Fletcher-Rivs.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
@@ -29,6 +26,9 @@
     </ClInclude>
     <ClInclude Include="NewtonMethod.h">
       <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="RProp.h">
+      <Filter>Файлы исходного кода</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

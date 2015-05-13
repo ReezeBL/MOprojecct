@@ -5,8 +5,9 @@
 class Net{
 private:
 	Vector (*grad)(Vector);
-	Vector weights;
+	Vector weights;	
 public:
+	int it;
 	Net(Vector (*_grad)(Vector));
 	Vector getMinPoint(Vector X0);
 };

@@ -30,27 +30,27 @@ int main(){
 		time_t t =  clock();
 		Vector res = calcNewton.getMinPoint(testVal[i]);
 		t = clock() - t;
-		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), затраченное время: " << t << " мс." << endl;
+		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), количество итераций: " << calcNewton.it << endl;
 	}
 	cout << "Тестирование алгоритма RProp: " << endl;
 	for(int i=0;i<4;i++){
 		time_t t =  clock();
 		Vector res = calcRprop.getMinPoint(testVal[i]);
 		t = clock() - t;
-		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), затраченное время: " << t << " мс." << endl;
+		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), количество итераций: " << calcRprop.it << endl;
 	}
 	cout << "Тестирование алгоритма Флетчера-Ривса: " << endl;
 	for(int i=0;i<4;i++){
 		time_t t =  clock();
 		Vector res = calcFletcherRivs.getMinPoint(testVal[i]);
 		t = clock() - t;
-		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), затраченное время: " << t << " мс." << endl;
+		cout << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), количество итераций: " << calcFletcherRivs.it << endl;
 	}
 	cout << "Тестирование метода градиентного спуска по правилу Армихо: " << endl;
 	for(int i=0;i<4;i++){
 		time_t t =  clock();
 		Vector res = calcArmicho.getMinPoint(testVal[i]);
 		t = clock() - t;
-		cout  << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), затраченное время: " << t << " мс." << endl;
+		cout  << "Точка (" << testVal[i].x << ";" << testVal[i].y << "), найденный минимум - (" << res.x << ";"<< res.y << "), количество итераций: " << calcArmicho.it << endl;
 	}
 }
