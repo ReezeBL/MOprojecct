@@ -9,31 +9,24 @@ FletcherRivsCalculations::FletcherRivsCalculations(Vector (*Gradient)(Vector), d
 }
 
 double FletcherRivsCalculations::minimizer(Vector dir){
-	const double k = (1.0+sqrt(5))/2.0;
 	double b = 1;
-	double a = -1;
-	
-	double p1 = b - (b-a)/k;
-	double p2 = a + (b-a)/k; 
-	double fz1 = func(_x0 + dir*p1);
-	double fz2 = func(_x0 + dir*p2);
+	double a = 0;
+	 
+	do {
+		double d = (b-a)/20.0 ;
+		double p1 = (a+b)/2.0 - d;
+		double p2 = (a+b)/2.0 + d; 
+		double fz1 = func(_x0 + dir*p1);
+		double fz2 = func(_x0 + dir*p2);
 
-	while((b-a) > e){
-		if(fz1 < fz2){
+		if(fz1 < fz2)
 			b = p2;
-			p1 = b - (b-a)/k;
-			p2 = a + (b-a)/k; 
-			fz1 = func(_x0 + dir*p1);
-			fz2 = func(_x0 + dir*p2);
-		}
-		else{
-			a = p1;
-			p1 = b - (b-a)/k;
-			p2 = a + (b-a)/k; 
-			fz1 = func(_x0 + dir*p1);
-			fz2 = func(_x0 + dir*p2);		
-		}
+		else
+			a = p1;	
+		
 	}
+	while((b-a) > e);
+
 	double ans = (b+a)/2.0;
 	return ans;
 }
@@ -47,14 +40,14 @@ Vector FletcherRivsCalculations::getMinPoint(Vector X0){
 		r = -grad(_x0);
 		S = r;
 		_x0 = _x0 + minimizer(S)*S;
-		if(S.Abs() < e ) return _x0;
-		for(int i=0;i<2;i++){
+		if(r.Abs() < e ) return _x0;
+		for(int i=0;i<1;i++){
 			it++;
 			Vector rp = r;
 			r = -grad(_x0);	
 			S = r + ((r*r)/(rp*rp))*S;	
 			_x0 = _x0 + minimizer(S)*S;
-			if(S.Abs() < e) return _x0;
+			if(r.Abs() < e) return _x0;
 		}
 	}
 }
